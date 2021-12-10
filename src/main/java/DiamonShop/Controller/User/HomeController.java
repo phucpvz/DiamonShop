@@ -1,24 +1,19 @@
 package DiamonShop.Controller.User;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import DiamonShop.Dao.SlidesDao;
-import DiamonShop.Service.User.HomeServiceImpl;
-
 @Controller
-public class HomeController {
-
-	@Autowired
-	HomeServiceImpl HomeService;
+public class HomeController extends BaseController {
 	
 	@RequestMapping(value = {"/", "/trang-chu"})
 	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("user/index");
-		mv.addObject("slides", HomeService.getDataSlide());
-		return mv;
+		_mvShare.addObject("slides", _homeService.getDataSlide());
+		_mvShare.addObject("categories", _homeService.getDataCategories());
+		_mvShare.addObject("products", _homeService.getDataProducts());
+		_mvShare.setViewName("user/index");
+		return _mvShare;
 	}
 	
 	@RequestMapping(value = {"/product"})
