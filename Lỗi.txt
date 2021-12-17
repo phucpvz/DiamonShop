@@ -1,0 +1,2 @@
+- Hiển thị sản phẩm mới và nổi bật tách biệt
+- Sản phẩm ở đầu bị mất lúc phân trang (do limit chạy từ 0)

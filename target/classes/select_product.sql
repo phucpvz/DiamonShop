@@ -20,4 +20,3 @@ products AS p
 INNER JOIN
 colors AS c
 ON p.id = c.id_product
-GROUP BY p.id, c.id_product
