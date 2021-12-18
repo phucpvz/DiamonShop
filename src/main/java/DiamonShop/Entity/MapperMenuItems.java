@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class MenuItemMapper implements RowMapper<MenuItem> {
+public class MapperMenuItems implements RowMapper<MenuItem> {
 
 	public MenuItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 		MenuItem item = new MenuItem();

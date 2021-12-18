@@ -1,22 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
+<%@include file="/WEB-INF/views/layouts/user/taglib.jsp" %>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chi tiết sản phẩm</title>
-<style>
-	.product-content{
-		overflow-x: hidden; 
-	}
-</style>
+<title>Đăng ký tài khoản</title>
 </head>
 <body>
 	<!-- 
 Body Section 
 -->
-	<div class="row product-content">
+	<div class="row">
 		<div id="sidebar" class="span3">
 			<div class="well well-small">
 				<ul class="nav nav-list">
@@ -114,106 +109,77 @@ Body Section
 		<div class="span9">
 			<ul class="breadcrumb">
 				<li><a href="index.html">Trang chủ</a> <span class="divider">/</span></li>
-				<li><a href="products.html">Sản phẩm</a> <span class="divider">/</span></li>
-				<li class="active">Chi tiết sản phẩm</li>
+				<li class="active">Người dùng</li>
 			</ul>
-			<div class="well well-small">
-				<div class="row-fluid">
-					<div class="span5">
-						<div id="myCarousel" class="carousel slide cntr">
-							<div class="carousel-inner">
-								<div class="item active">
-									<a href="#"> <img src="<c:url value="/assets/user/img/${ product.img }"/>" alt=""
-										style="width: 100%"></a>
-								</div>
-							</div>
-							<a class="left carousel-control" href="#myCarousel"
-								data-slide="prev">‹</a> <a class="right carousel-control"
-								href="#myCarousel" data-slide="next">›</a>
-						</div>
-					</div>
-					<div class="span7">
-						<h3>${ product.name }</h3>
-						<hr class="soft" />
+			<h3>Người dùng</h3>
+			<hr class="soft" />
 
-						<form class="form-horizontal qtyFrm" method="get" action="<c:url value="/add-cart/${ product.id_product }"/>">
+			<div class="row">
+				<div class="span4">
+					<div class="well">
+						<h5>Đăng ký tài khoản</h5>
+						<br />
+						<form:form action="dang-ky" method="post" modelAttribute="user">  
 							<div class="control-group">
-								<label class="control-label"><span><fmt:formatNumber type="number" groupingUsed="true" value="${ product.price }" /> ₫</span></label>
+								<label class="control-label" for="inputEmail">Email</label>
 								<div class="controls">
-									<input type="number" min="0" value="0" class="span6">
+									<form:input class="span3" type="email" placeholder="Mời nhập email" path="username" />
 								</div>
 							</div>
-
 							<div class="control-group">
-								<label class="control-label"><span>Color</span></label>
+								<label class="control-label" for="inputEmail">Mật khẩu</label>
 								<div class="controls">
-									<select class="span11">
-										<option>Red</option>
-										<option>Purple</option>
-										<option>Pink</option>
-										<option>Red</option>
-									</select>
+									<form:input class="span3" type="password" placeholder="Mời nhập mật khẩu" path="password" />
 								</div>
 							</div>
-							<h4>100 items in stock</h4>
-							<p>${ product.title }
-							<p>
-								<button type="submit" class="shopBtn">
-									<span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng
-								</button>
-						</form>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Họ và tên</label>
+								<div class="controls">
+									<form:input class="span3" type="text" placeholder="Mời nhập họ và tên" path="display_name" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Địa chỉ</label>
+								<div class="controls">
+									<form:input class="span3" type="text" placeholder="Mời nhập địa chỉ" path="address" />
+								</div>
+							</div>
+							<div class="controls">
+								<button type="submit" class="btn block">Đăng ký thành viên</button>
+							</div>
+						</form:form>
 					</div>
 				</div>
-				<hr class="softn clr" />
-
-
-				<ul id="productDetail" class="nav nav-tabs">
-					<li class="active"><a href="#home" data-toggle="tab">Chi tiết sản phẩm</a></li>
-					<li class=""><a href="#profile" data-toggle="tab">Sản phẩm liên quan</a></li>
-				</ul>
-				<div id="myTabContent" class="tab-content tabWrapper">
-					<div class="tab-pane fade active in" id="home">
-						${ product.details }
-					</div>
-					<div class="tab-pane fade" id="profile">
-					
-					<c:set var="countList" value="${ productsByIDCategory.size() }" />
-					<c:if test="${  productsByIDCategory.size() > 5 }">
-						<c:set var="countList" value="5" />
-					</c:if>
-					
-						<c:forEach var="item" items="${ productsByIDCategory }" begin="1" end="${ countList }" varStatus="loop">
-							<div class="row-fluid">
-								<div class="span2">
-									<img src="<c:url value="/assets/user/img/${ item.img }"/>" alt="">
-								</div>
-								<div class="span6">
-									<h5>${ item.name }</h5>
-									<p>${ item.title }</p>
-								</div>
-								<div class="span4 alignR">
-									<form class="form-horizontal qtyFrm">
-										<h3><fmt:formatNumber type="number" groupingUsed="true" value="${ item.price }" /> ₫</h3>
-										<div class="btn-group">
-											<a href="product_details.html" class="defaultBtn"><span
-												class=" icon-shopping-cart"></span> Add to cart</a> <a
-												href="product_details.html" class="shopBtn">VIEW</a>
-										</div>
-									</form>
+				<div class="span1">&nbsp;</div>
+				<div class="span4">
+					<div class="well">
+						<h5>Đăng nhập hệ thống</h5>
+						<h1>${ statusLogin }</h1>
+						<form:form action="dang-nhap" method="post" modelAttribute="user">  
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Email</label>
+								<div class="controls">
+									<form:input class="span3" type="email" placeholder="Mời nhập email" path="username" />
 								</div>
 							</div>
-							<hr class="soft" />
-						</c:forEach>
-					
-						
-
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">Mật khẩu</label>
+								<div class="controls">
+									<form:input type="password" class="span3" placeholder="Mời nhập mật khẩu" path="password" />
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="defaultBtn">Đăng nhập</button>
+									<a href="#">Quên mật khẩu?</a>
+								</div>
+							</div>
+						</form:form>
 					</div>
-					
 				</div>
-
 			</div>
+
 		</div>
 	</div>
-	<!-- Body wrapper -->
 </body>
 </html>

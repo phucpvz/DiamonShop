@@ -1,0 +1,4 @@
+- Hiển thị sản phẩm mới và nổi bật tách biệt
+- Sản phẩm ở đầu bị mất lúc phân trang (do limit chạy từ 0)
+- Đăng ký: Validate, check tài khoản trùng trước khi thêm, max, min, required
+- Lỗi nhập người dùng (email) không tồn tại lúc đăng nhập

@@ -3,18 +3,13 @@ package DiamonShop.Dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import DiamonShop.Dto.ProductDto;
-import DiamonShop.Dto.ProductDtoMapper;
+import DiamonShop.Dto.MapperProductDto;
 
 @Repository
 public class ProductDao extends BaseDao {
-
-	@Autowired
-	public JdbcTemplate _jdbcTemplate;
 
 	private StringBuffer sqlString() {
 		StringBuffer sql = new StringBuffer();
@@ -80,23 +75,23 @@ public class ProductDao extends BaseDao {
 
 	public List<ProductDto> getDataProducts() {
 		String sql = sqlProducts(false, true);
-		List<ProductDto> list = _jdbcTemplate.query(sql, new ProductDtoMapper());
+		List<ProductDto> list = _jdbcTemplate.query(sql, new MapperProductDto());
 		return list;
 	}
 	
 	public List<ProductDto> getProductsByIDCategory(int id) {
 		String sql = sqlProductsByIDCategory(id).toString();
-		List<ProductDto> list = _jdbcTemplate.query(sql, new ProductDtoMapper());
+		List<ProductDto> list = _jdbcTemplate.query(sql, new MapperProductDto());
 		return list;
 	}
 	
 	public List<ProductDto> getProductsPagination(int id, int start, int limit) {
 		String sqlProductsByID = sqlProductsByIDCategory(id).toString();
-		List<ProductDto> listProductsByID = _jdbcTemplate.query(sqlProductsByID, new ProductDtoMapper());
+		List<ProductDto> listProductsByID = _jdbcTemplate.query(sqlProductsByID, new MapperProductDto());
 		List<ProductDto> list = new ArrayList<ProductDto>();
 		if (listProductsByID.size() > 0) {
 			String sql = sqlProductsPagination(id, start, limit);
-			list = _jdbcTemplate.query(sql, new ProductDtoMapper());
+			list = _jdbcTemplate.query(sql, new MapperProductDto());
 		}
 		return list;
 	}
@@ -111,7 +106,13 @@ public class ProductDao extends BaseDao {
 
 	public List<ProductDto> getProductByID(long id) {
 		String sql = sqlProductByID(id);
-		List<ProductDto> list = _jdbcTemplate.query(sql, new ProductDtoMapper());
+		List<ProductDto> list = _jdbcTemplate.query(sql, new MapperProductDto());
 		return list;
+	}
+	
+	public ProductDto findProductByID(long id) {
+		String sql = sqlProductByID(id);
+		ProductDto product = _jdbcTemplate.queryForObject(sql, new MapperProductDto());
+		return product;
 	}
 }
